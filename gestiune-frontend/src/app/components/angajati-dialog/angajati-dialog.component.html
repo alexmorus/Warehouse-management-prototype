@@ -1,0 +1,83 @@
+<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle align="center">Angajati</h2>
+
+
+<mat-dialog-content style="text-align: center; align-content: center;">
+
+    <form [formGroup]="formData">
+        <div fxFlex style="padding: 10px;overflow-y: auto" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <div fxLayout="column">
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Nume</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Nume" 
+                        formControlName="nume">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Adresa</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Adresa" 
+                        formControlName="adresa">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Oras</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Oras" 
+                        formControlName="oras">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>CNP</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="CNP" 
+                        formControlName="cnp">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="200px">
+                        <mat-label>Data angajare</mat-label>
+                        <input 
+                        matInput
+                        placeholder="Data angajare"
+                        [matDatepicker]="picker0"
+                        formControlName="data_angajarii"
+                        datepicker-format="dd.mm.yyyy">
+                        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                        <mat-datepicker #picker0></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Durata contract</mat-label>
+                        <mat-select formControlName="durata_contract" required>
+                            <mat-option value='3 luni'>3 luni</mat-option>
+                            <mat-option value='6 luni'>6 luni</mat-option>
+                            <mat-option value='nedeterminat'>Nedeterminat</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center" class="buttons">
+    <button mat-button color="primary" mat-dialog-close>Închide</button>
+    <button mat-button color="warn" (click)="saveAngajat()" cdkFocusInitial>Salveaza</button>
+</mat-dialog-actions>

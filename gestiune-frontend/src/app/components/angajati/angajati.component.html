@@ -1,0 +1,85 @@
+<!-- 
+    listare in tabel
+    optiune afisare partiala -> mat-select deasupra tabelului;
+    
+    modifica -> dialog popup pentru modificare 
+    adauga -> acelasi dialog, nepopulat
+-->
+
+<div fxLayout="row" style="padding-top: 20px; padding-left: 20px;">
+   <button type="button"
+   mat-raised-button
+   color="warn" 
+   style="height: 35px"
+   (click)="addAngajat()">
+    Adauga
+   </button>
+</div>
+
+<br/><br/>
+<div fxLayout="column" style="padding-bottom: 35px">
+    <div fxLayout="row" style="padding: 10px" >    
+        <table mat-table  class="mat-elevation-z8" style="overflow: auto;width: 100%;" [dataSource]="angajati" *ngIf="angajati.length !== 0" > 
+            
+            <ng-container matColumnDef="nume" style="width: 140px;">
+                <th mat-header-cell *matHeaderCellDef> Nume </th>
+                <td mat-cell *matCellDef="let element" style="width: 140px;"> {{ element.nume}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="adresa" style="width: 150px;">
+                <th mat-header-cell *matHeaderCellDef> Adresa </th>
+                <td mat-cell *matCellDef="let element" style="width: 150px;"> {{ element.adresa }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="oras" style="width: 60px;">
+                <th mat-header-cell *matHeaderCellDef> Oras </th>
+                <td mat-cell *matCellDef="let element" style="width: 60px;"> {{ element.oras }} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="cnp" style="width: 110px;">
+                <th mat-header-cell *matHeaderCellDef> CNP </th>
+                <td mat-cell *matCellDef="let element" style="width: 110px;"> {{ element.cnp }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="data_angajarii" style="width: 100px;">
+                <th mat-header-cell *matHeaderCellDef> Data angajarii </th>
+                <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.data_angajarii }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="durata_contract" style="width: 130px;">
+                <th mat-header-cell *matHeaderCellDef> Durata contract </th>
+                <td mat-cell *matCellDef="let element" style="width: 130px;"> {{ element.durata_contract }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nrProd" style="width: 170px;">
+                <th mat-header-cell *matHeaderCellDef> Numar produse preluate </th>
+                <td mat-cell *matCellDef="let element" style="width: 170px;"> {{ element.nrProdPreluate }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actiuni" style="width: 80px;">
+                <th mat-header-cell *matHeaderCellDef> </th>
+                <td mat-cell *matCellDef="let element; let i=index" style="width: 80px;">
+                    <button 
+                    type="button"
+                    mat-raised-button
+                    color="warn" 
+                    style="height: 35px"
+                    (click)="editAngajat(element)">
+                    Editare</button>
+                    <!-- <button 
+                    type="button"
+                    mat-raised-button
+                    color="primary" 
+                    style="height: 35px"
+                    (click)="deleteAngajat(element)">
+                    Stergere</button> -->
+                </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="coloane"></tr>
+            <tr mat-row *matRowDef="let row; columns: coloane;"></tr> 
+        </table>
+        <div *ngIf="angajati.length === 0" > Nu exista facturi! </div>
+    </div>
+</div>

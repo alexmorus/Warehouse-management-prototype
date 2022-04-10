@@ -1,0 +1,60 @@
+<h2 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle align="center">Producator</h2>
+
+
+<mat-dialog-content style="text-align: center; align-content: center;">
+
+    <form [formGroup]="formData">
+        <div fxFlex style="padding: 10px;overflow-y: auto" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+            <div fxLayout="column">
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Denumire</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Denumire" 
+                        formControlName="denumire">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Adresa</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Adresa" 
+                        formControlName="adresa">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>Oras</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="Oras" 
+                        formControlName="oras">
+                    </mat-form-field>
+                </div>
+                <div fxFlex fxLayout="row" fxLayoutGap="10px">
+                    <mat-form-field class="fisa-field" fxFlex="7">
+                        <mat-label>CUI</mat-label>
+                        <input 
+                        matInput 
+                        class="form-control"
+                        placeholder="CUI" 
+                        formControlName="cui"
+                        [disabled]="this.producatorNou === 0">
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center" class="buttons">
+    <button mat-button color="primary" mat-dialog-close>Închide</button>
+    <button mat-button color="warn" (click)="saveProducator()" cdkFocusInitial>Salveaza</button>
+</mat-dialog-actions>

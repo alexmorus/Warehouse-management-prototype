@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isAuthenticated()"> <!-- *ngIf="currentUser" -->
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Stoc Depozit</a>
+        <a class="nav-item nav-link" routerLink="/producatori">Producatori</a> <!-- ngIf="currentUser.role === 'admin'" -->
+        <a class="nav-item nav-link" routerLink="/distribuitori">Distribuitori</a>
+        <a class="nav-item nav-link" routerLink="/angajati" *ngIf="clasaUtilizator() === 'admin'">Angajati</a>
+        <a class="nav-item nav-link" routerLink="/utilizatori" *ngIf="clasaUtilizator() === 'admin'">Utilizatori</a>
+        <a class="nav-item nav-link" routerLink="/" (click)="logout()">Logout</a> <!-- aliniata la final -->
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <app-login *ngIf="!isAuthenticated()"></app-login>
+                <router-outlet *ngIf="isAuthenticated()"></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+

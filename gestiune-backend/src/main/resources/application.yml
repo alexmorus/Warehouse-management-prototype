@@ -1,0 +1,27 @@
+## YAML Template.
+spring:
+    jpa:
+        database: POSTGRESQL
+        properties:
+            hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+
+logging.level.root: INFO
+
+server:
+    port: 8888
+---
+spring:
+    config.activate.on-profile: development
+    datasource:
+        platform: proiect_bd
+        url: jdbc:postgresql://localhost:5432/proiect_bd
+        username: postgres
+        password: test.123
+server:
+    port: 8080
+    
+            
+

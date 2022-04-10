@@ -1,0 +1,73 @@
+<div fxLayout="row" style="padding-top: 20px; padding-left: 20px;">
+    <button type="button"
+    mat-raised-button
+    color="warn" 
+    style="height: 35px"
+    (click)="addDistribuitor()">
+     Adauga
+    </button>
+ </div>
+ 
+ <br/><br/>
+ <div fxLayout="column" style="padding-bottom: 35px">
+     <div fxLayout="row" style="padding: 10px" >    
+         <table mat-table  class="mat-elevation-z8" style="overflow: auto;width: 100%;" [dataSource]="distribuitori" *ngIf="distribuitori.length !== 0" > 
+ 
+             <ng-container matColumnDef="denumire" style="width: 70px;">
+                 <th mat-header-cell *matHeaderCellDef> Denumire </th>
+                 <td mat-cell *matCellDef="let element" style="width: 70px;"> {{ element.denumire }} </td>
+             </ng-container>
+             
+             <ng-container matColumnDef="adresa" style="width: 140px;">
+                 <th mat-header-cell *matHeaderCellDef> Adresa </th>
+                 <td mat-cell *matCellDef="let element" style="width: 140px;"> {{ element.adresa }} </td>
+             </ng-container>
+ 
+             <ng-container matColumnDef="oras" style="width: 60px;">
+                 <th mat-header-cell *matHeaderCellDef> Oras </th>
+                 <td mat-cell *matCellDef="let element" style="width: 60px;"> {{ element.oras }} </td>
+             </ng-container>
+ 
+             <ng-container matColumnDef="cui" style="width: 60px;">
+                 <th mat-header-cell *matHeaderCellDef> CUI </th>
+                 <td mat-cell *matCellDef="let element" style="width: 60px;"> {{ element.cui }} </td>
+             </ng-container>
+             
+             <ng-container matColumnDef="valabilitate_contract" style="width: 100px;">
+                 <th mat-header-cell *matHeaderCellDef> Valabilitate contract </th>
+                 <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.valabilitateContract }} </td>
+             </ng-container>
+
+             <ng-container matColumnDef="nrProd" style="width: 100px;">
+                <th mat-header-cell *matHeaderCellDef> Nr producatori colaborare </th>
+                <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.nrProd }} </td>
+            </ng-container>
+
+             <ng-container matColumnDef="actiuni" style="width: 240px;">
+                 <th mat-header-cell *matHeaderCellDef> </th>
+                 <td mat-cell *matCellDef="let element; let i=index" style="width: 240px;">
+                     <button 
+                     type="button"
+                     mat-raised-button
+                     color="warn" 
+                     style="height: 35px"
+                     (click)="editDistribuitor(element)">
+                     Editare</button>
+                     <button 
+                     type="button"
+                     mat-raised-button
+                     color="primary" 
+                     style="height: 35px"
+                     (click)="deleteDistribuitor(element)">
+                     Stergere</button>
+                 </td>
+                 <td mat-footer-cell *matFooterCellDef> </td>
+             </ng-container>
+     
+             <tr mat-header-row *matHeaderRowDef="coloane"></tr>
+             <tr mat-row *matRowDef="let row; columns: coloane;"></tr> 
+         </table>
+         <div *ngIf="distribuitori.length === 0" > Nu exista facturi! </div>
+     </div>
+ </div>
+ 

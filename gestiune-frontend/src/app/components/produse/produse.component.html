@@ -1,0 +1,167 @@
+ <mat-tab-group>
+    <mat-tab label="Produse">
+        <div class="col-md-12" fxLayout="column" style="padding-bottom: 35px">
+
+            <br>
+
+            <div fxLayout="row" class="row">
+                <div class="col-md-2">
+                    <p>Criteriu filtrare</p>
+                </div>
+
+                <div fxLayout="column" class="col-md-4">
+                    <mat-select [(ngModel)]="parametru" placeholder="Fara">
+                        <mat-option value="null">Fara</mat-option>
+                        <mat-option value="angajat">Nume angajat preluare</mat-option>
+                        <mat-option value="after">Intrate in gestiune dupa data</mat-option>
+                        <mat-option value="price">Pret mai mare de </mat-option>
+                        <mat-option value="producator">CUI producator</mat-option>
+                        <mat-option value="distribuitor">CUI distribuitor</mat-option>
+                    </mat-select>
+                </div>
+
+                <div fxLayout="column" class="col-md-4">
+                    <input *ngIf="parametru === 'angajat'" matInput placeholder="Nume angajat" [(ngModel)]="valoare">
+                    <div *ngIf="parametru === 'after'">
+                        <input
+                        matInput
+                        placeholder="Data inceput cautare"
+                        [matDatepicker]="picker0"
+                        [(ngModel)]="data"
+                        datepicker-format="dd.mm.yyyy">
+                        <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                        <mat-datepicker #picker0></mat-datepicker>  
+                    </div>       
+                    <input *ngIf="parametru === 'price'" matInput placeholder="Pret minim" [(ngModel)]="valoare">
+                    <input *ngIf="parametru === 'producator'" matInput placeholder="CUI producator" [(ngModel)]="valoare">
+                    <input *ngIf="parametru === 'distribuitor'" matInput placeholder="CUI distribuitor" [(ngModel)]="valoare">
+                </div>
+            </div>
+
+            <div class="row">
+                <div fxLayout="column" class="col-md-2">
+                    <button type="button"
+                    mat-raised-button
+                    color="warn" 
+                    style="height: 35px"
+                    (click)="cauta()">
+                    Cauta
+                    </button>
+                </div>
+            </div>
+
+            <div class="row" fxLayout="row" style="padding-top: 20px; padding-left: 20px;">
+                <div class="col-md-12" align="right">
+                    <button type="button"
+                    mat-raised-button
+                    color="warn" 
+                    style="height: 35px"
+                    (click)="addProdus()">
+                    Adauga
+                    </button>
+                </div>
+             </div>
+
+            <div fxLayout="row" style="padding: 10px" >    
+                <table mat-table class="mat-elevation-z8" style="overflow: auto;width: 100%;" [dataSource]="produse" *ngIf="produse.length !== 0" > 
+        
+                    <ng-container matColumnDef="model" style="width: 70px;">
+                        <th mat-header-cell *matHeaderCellDef> Model </th>
+                        <td mat-cell *matCellDef="let element" style="width: 70px;"> {{ element.model }} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="descriere" style="width: 140px;">
+                        <th mat-header-cell *matHeaderCellDef> Descriere </th>
+                        <td mat-cell *matCellDef="let element" style="width: 140px;"> {{ element.descriere }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="pret" style="width: 60px;">
+                        <th mat-header-cell *matHeaderCellDef> Pret </th>
+                        <td mat-cell *matCellDef="let element" style="width: 60px;"> {{ element.pret }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="poza" style="width: 60px;">
+                        <th mat-header-cell *matHeaderCellDef> Imagine </th>
+                        <td mat-cell *matCellDef="let element" style="width: 60px;"> 
+                           <img [src]="element.poza" style="max-width: 200px; max-height: 200px;" alt="Error fetching image">
+                       </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="stoc" style="width: 100px;">
+                        <th mat-header-cell *matHeaderCellDef> Stoc </th>
+                        <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.stoc }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="denumireProducator" style="width: 100px;">
+                        <th mat-header-cell *matHeaderCellDef> Producator </th>
+                        <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.denumireProducator }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="denumireDistribuitor" style="width: 130px;">
+                        <th mat-header-cell *matHeaderCellDef> Distribuitor </th>
+                        <td mat-cell *matCellDef="let element" style="width: 130px;"> {{ element.denumireDistribuitor }}</td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="actiuni" style="width: 240px;">
+                        <th mat-header-cell *matHeaderCellDef> </th>
+                        <td mat-cell *matCellDef="let element; let i=index" style="width: 240px;">
+                            <button 
+                            type="button"
+                            mat-raised-button
+                            color="warn" 
+                            style="height: 35px"
+                            (click)="editProdus(element)">
+                            Editare</button>
+                            <button 
+                            type="button"
+                            mat-raised-button
+                            color="primary" 
+                            style="height: 35px"
+                            (click)="deleteProdus(element)">
+                            Stergere</button>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> </td>
+                    </ng-container>
+            
+                    <tr mat-header-row *matHeaderRowDef="coloane"></tr>
+                    <tr mat-row *matRowDef="let row; columns: coloane;"></tr> 
+                </table>
+                <div *ngIf="produse.length === 0" > Nu exista produse! </div>
+            </div>
+        </div>       
+    </mat-tab>
+
+    <mat-tab label="Documente">
+        <div fxLayout="column" style="padding-bottom: 35px">
+            <div fxLayout="row" style="padding: 10px" >    
+                <table mat-table class="mat-elevation-z8" style="overflow: auto;width: 100%;" [dataSource]="documente" *ngIf="documente.length !== 0" > 
+        
+                    <ng-container matColumnDef="document" style="width: 70px;">
+                        <th mat-header-cell *matHeaderCellDef> Document </th>
+                        <td mat-cell *matCellDef="let element" style="width: 70px;"> {{ element.document }} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="data" style="width: 140px;">
+                        <th mat-header-cell *matHeaderCellDef> Data intrarii in gestiune </th>
+                        <td mat-cell *matCellDef="let element" style="width: 140px;"> {{ element.data }} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="numeAngajat" style="width: 60px;">
+                        <th mat-header-cell *matHeaderCellDef> Nume angajat preluare </th>
+                        <td mat-cell *matCellDef="let element" style="width: 60px;"> {{ element.numeAngajat }} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="modelProdus" style="width: 100px;">
+                        <th mat-header-cell *matHeaderCellDef> Model produs </th>
+                        <td mat-cell *matCellDef="let element" style="width: 100px;"> {{ element.modelProdus }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="coloaneDoc"></tr>
+                    <tr mat-row *matRowDef="let row; columns: coloaneDoc;"></tr> 
+                </table>
+                <div *ngIf="documente.length === 0" > Nu exista documente! </div>
+            </div>
+        </div>       
+    </mat-tab>
+</mat-tab-group>
+ 
